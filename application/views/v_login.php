@@ -32,15 +32,12 @@
                     <div class="card rounded shadow-sm">
                         <div class="card-body">
                             <?php
-                            if ($this->session->userdata('login_message') == 'gagal')
-                            {
+                            if ($this->session->userdata('login_message') == 'gagal') {
                                 echo '<div class="alert alert-danger">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                         <strong>Login Gagal!</strong>
                                     </div>';
-                            }
-                            else if ($this->session->userdata('logout_message') == 'berhasil')
-                            {
+                            }  else if ($this->session->userdata('logout_message') == 'berhasil') {
                                 echo '<div class="alert alert-success">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                         <strong>Logout Berhasil!</strong>

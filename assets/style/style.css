@@ -1,0 +1,42 @@
+@font-face{
+	font-family: 'Open Sans';
+	src: url('../Open_Sans/OpenSans-Regular.ttf');
+}
+@font-face{
+	font-family: 'Open Sans Bold';
+	src: url('../Open_Sans/OpenSans-Bold.ttf');
+}
+body {
+	font-size: 13px;
+	font-family: Open Sans;
+}
+a:hover {
+	text-decoration: none;
+}
+.title {
+	font-weight: 700;
+}
+.login-title h5 {
+	font-weight: 700;
+}
+.form-control,
+.custom-select {
+	font-size: inherit;
+}
+
+.close {
+	margin-top: -3px;
+}
+.close:focus {
+	box-shadow: none;
+	outline: none;
+}
+.form-group .err-msg-1,
+.form-group .err-msg-2 {
+	display: none;
+}
+.form-group .show-pass {
+	position: absolute;
+	right: 10px;
+	top: 7px;
+}

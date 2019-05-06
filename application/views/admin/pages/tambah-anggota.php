@@ -521,6 +521,24 @@
                                         </nav>
                                     </div>
                                 </div>
+                                <?php
+                                if ($this->session->userdata('message') == 'berhasil') {
+                                    echo '<div class="message">
+                                            <div class="alert alert-success">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <strong>Tambah Anggota Berhasil</strong>
+                                            </div>
+                                        </div>';
+                                } else if ($this->session->userdata('message') == 'gagal') {
+                                    echo '<div class="message">
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            <strong>Tambah Anggota Gagal!</strong>
+                                        </div>
+                                    </div>';
+                                }
+                                ?>
+                                
                             </div>
                         </div>
                         <!-- ============================================================== -->
@@ -621,8 +639,9 @@
                                 </div>
                                 <div class="card">
                                     <h5 class="card-header">Form Tambah Anggota</h5>
+                                    
                                     <div class="card-body">
-                                        <form>
+                                        <form method="POST" action="<?=site_url('dashboard/tambah_anggota')?>">
                                             <div class="form-group">
                                                 <label for="inputText3" class="col-form-label">Nama Lengkap</label>
                                                 <input id="inputText3" name="nama" type="text" class="form-control">
@@ -630,9 +649,9 @@
                                             <div class="form-group">
                                                 <label for="input-select">Level</label>
                                                 <select name="level" class="form-control" id="input-select">
-                                                    <option value="admin">- level -</option>
-                                                    <option value="anggota">Anggota</option>
-                                                    <option value="admin">Admin</option>
+                                                    <option value="">- level -</option>
+                                                    <option value="2">Anggota</option>
+                                                    <option value="1">Admin</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -649,20 +668,20 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="input-select">Jenis Kelamin</label>
-                                                <select name="level" class="form-control" id="input-select">
-                                                    <option value="admin">- Jenis Kelamin -</option>
-                                                    <option value="anggota">Laki - Laki</option>
-                                                    <option value="admin">Perempuan</option>
+                                                <select name="jenis_kelamin" class="form-control" id="input-select">
+                                                    <option value="">- Jenis Kelamin -</option>
+                                                    <option value="L">Laki - Laki</option>
+                                                    <option value="P">Perempuan</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="inputEmail">Email address</label>
                                                 <input id="inputEmail" type="email" placeholder="name@example.com" class="form-control">
                                                 <p>We'll never share your email with anyone else.</p>
-                                            </div>
+                                            </div> -->
                                             
                                             <div class="form-group">
-                                                <input type="submit" class="btn btn-primary" value="Simpan">
+                                                <input name="simpan" type="submit" class="btn btn-primary" value="Simpan">
                                             </div>
                                         </form>
                                     </div>

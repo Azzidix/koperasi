@@ -37,23 +37,6 @@
                 <div class="text-center p-3 mx-auto login">
                     <div class="card rounded shadow-sm border-top-green">
                         <div class="card-body">
-<<<<<<< HEAD
-                            <?php
-                            if ($this->session->userdata('login_message') == 'gagal') {
-                                echo '<div class="alert alert-danger">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <strong>Login Gagal!</strong>
-                                    </div>';
-                            }  else if ($this->session->userdata('logout_message') == 'berhasil') {
-                                echo '<div class="alert alert-success">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                        <strong>Logout Berhasil!</strong>
-                                    </div>';
-                            }
-                            ?>
-                            
-                            
-=======
                             <div class="login-message">
                                 <?php
                                 if ($this->session->userdata('message') == 'gagal') {
@@ -69,7 +52,6 @@
                                 }
                                 ?>
                             </div>
->>>>>>> develop
                             <div class="login-title">
                                 <h5>Login Akun</h5>
                             </div>

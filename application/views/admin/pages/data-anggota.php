@@ -549,35 +549,11 @@
                                                 <th>No Telpon</th>
                                                 <th>Tanggal Gabung</th>
                                                 <th>Level</th>
-<<<<<<< HEAD
-=======
                                                 <th>Action</th>
->>>>>>> develop
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-<<<<<<< HEAD
-                                            foreach ($anggota as $key) {
-                                                $level = '';
-                                                if ($key->level == 1) {
-                                                    $level = 'Admin';
-                                                } else if ($key->level ==2) {
-                                                    $level = 'Anggota';
-                                                }
-                                                echo '<tr>
-                                                    <td>'.$key->nama.'</td>
-                                                    <td>'.$key->alamat.'</td>
-                                                    <td>'.$key->jenis_kelamin.'</td>
-                                                    <td>'.$key->tanggal_lahir.'</td>
-                                                    <td>'.$key->no_telpon.'</td>
-                                                    <td>'.$key->tanggal_gabung.'</td>
-                                                    <td>'.$level.'</td>
-                                                    </tr>';
-                                            }
-                                            ?>
-                                            
-=======
                                             if ($anggota != false) {
                                                 foreach ($anggota as $key) {
                                                     $level = '';
@@ -607,7 +583,6 @@
                                                 }
                                             } 
                                             ?>
->>>>>>> develop
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -618,10 +593,7 @@
                                                 <th>No Telpon</th>
                                                 <th>Tanggal Gabung</th>
                                                 <th>Level</th>
-<<<<<<< HEAD
-=======
                                                 <th>Action</th>
->>>>>>> develop
                                             </tr>
                                         </tfoot>
                                     </table>

@@ -25,6 +25,7 @@ class Dashboard extends CI_Controller
 	{
 		$data['anggota'] = $this->mdata->tampil_data_anggota();
 		$this->load->view('admin/pages/data-anggota',$data);
+		return $data;
 	}
 
 	public function tambah_anggota()
@@ -44,16 +45,17 @@ class Dashboard extends CI_Controller
 					'status' => 0,
 				);
 			if ($this->mdata->tambah_anggota($data) == true) {
-				$this->session->set_flashdata('message', 'berhasil');
+				return $this->session->set_flashdata('message', 'berhasil');
 			} else {
-				$this->session->set_flashdata('message', 'gagal');
+				return $this->session->set_flashdata('message', 'gagal');
 			}
 		}
 	}
 
 	public function data_simpanan()
 	{
-		$this->load->view('admin/pages/data-simpanan');
+		$data['simpanan'] = $this->mdata->tampil_data_simpanan();
+		$this->load->view('admin/pages/data-simpanan',$data);
 	}
 
 	public function tambah_simpanan()
@@ -63,7 +65,8 @@ class Dashboard extends CI_Controller
 
 	public function data_pinjaman()
 	{
-		$this->load->view('admin/pages/data-pinjaman');
+		$data['pinjaman'] = $this->mdata->tampil_data_pinjaman();
+		$this->load->view('admin/pages/data-pinjaman',$data);
 	}
 
 	public function tambah_pinjaman()

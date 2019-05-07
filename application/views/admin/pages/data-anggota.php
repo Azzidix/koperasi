@@ -149,7 +149,7 @@
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -539,7 +539,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                    <table id="example" class="table table-bordered second" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Nama</th>
@@ -549,10 +549,15 @@
                                                 <th>No Telpon</th>
                                                 <th>Tanggal Gabung</th>
                                                 <th>Level</th>
+<<<<<<< HEAD
+=======
+                                                <th>Action</th>
+>>>>>>> develop
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
+<<<<<<< HEAD
                                             foreach ($anggota as $key) {
                                                 $level = '';
                                                 if ($key->level == 1) {
@@ -572,6 +577,37 @@
                                             }
                                             ?>
                                             
+=======
+                                            if ($anggota != false) {
+                                                foreach ($anggota as $key) {
+                                                    $level = '';
+                                                    if ($key->level == 1) {
+                                                        $level = 'Admin';
+                                                        $color = 'alert alert-success';
+                                                    } else if ($key->level ==2) {
+                                                        $level = 'Anggota';
+                                                        $color = '';
+                                                    }
+                                                
+                                            ?>
+                                            <tr class="<?=$color?>">
+                                                <td><?=$key->nama?></td>
+                                                <td><?=$key->alamat?></td>
+                                                <td><?=$key->jenis_kelamin?></td>
+                                                <td><?=$key->tanggal_lahir?></td>
+                                                <td><?=$key->no_telpon?></td>
+                                                <td><?=$key->tanggal_gabung?></td>
+                                                <td><?=$level?></td>
+                                                <td>
+                                                    <button class="btn btn-sm text-danger p-1"><i class="fa fa-trash"></i> Hapus</button>
+                                                    <button class="btn btn-sm text-info p-1" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-edit"></i> Edit</button>
+                                                </td>
+                                            </tr>
+                                            <?php 
+                                                }
+                                            } 
+                                            ?>
+>>>>>>> develop
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -582,9 +618,69 @@
                                                 <th>No Telpon</th>
                                                 <th>Tanggal Gabung</th>
                                                 <th>Level</th>
+<<<<<<< HEAD
+=======
+                                                <th>Action</th>
+>>>>>>> develop
                                             </tr>
                                         </tfoot>
                                     </table>
+                                </div>
+                                <!-- Model Edit -->
+                                <!-- Button trigger modal -->
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                                    <div class="modal-content">
+                                        <form method="POST" action="<?=site_url('dashboard/update_anggota')?>">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="inputText3" class="col-form-label" value="">Nama Lengkap</label>
+                                                    <input id="inputText3" name="nama" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="input-select">Level</label>
+                                                    <select name="level" class="form-control" id="input-select">
+                                                        <option value="">- level -</option>
+                                                        <option value="2">Anggota</option>
+                                                        <option value="1">Admin</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputText5" class="col-form-label">Alamat</label>
+                                                    <input id="inputText5" name="alamat" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputText6" class="col-form-label">Nomor Telpon</label>
+                                                    <input id="inputText6" name="no_telpon" type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputText7" class="col-form-label">Tanggal Lahir </label>
+                                                    <input id="inputText7" name="tanggal_lahir" type="date" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="input-select">Jenis Kelamin</label>
+                                                    <select name="jenis_kelamin" class="form-control" id="input-select">
+                                                        <option value="">- Jenis Kelamin -</option>
+                                                        <option value="L">Laki - Laki</option>
+                                                        <option value="P">Perempuan</option>
+                                                    </select>
+                                                </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                                            <button name="simpan" type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                                          </div>
+                                        </form>
+                                    </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -2123,6 +2219,21 @@
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <script src="<?=base_url()?>/admin/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script>
+        $.ajax({
+            url: 'http://localhost/dashboard/data_anggota/',
+            type: 'GET',
+            dataType: 'json',
+            data: {},
+        })
+        .done(function(data) {
+            console.log(data);
+        })
+        .fail(function() {
+            console.log("error");
+        });
+        
+    </script>
     <script src="<?=base_url()?>/admin/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="<?=base_url()?>/admin/assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="<?=base_url()?>/admin/assets/vendor/multi-select/js/jquery.multi-select.js"></script>
@@ -2141,6 +2252,7 @@
     <script src="https://cdn.datatables.net/rowgroup/1.0.4/js/dataTables.rowGroup.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+    
     
 </body>
  

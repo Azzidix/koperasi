@@ -13,6 +13,12 @@ body {
 a:hover {
 	text-decoration: none;
 }
+.fs-20 {
+	font-size: 20px;
+}
+.fs-25 {
+	font-size: 25px;
+}
 .title {
 	font-weight: 700;
 }
@@ -23,7 +29,12 @@ a:hover {
 .custom-select {
 	font-size: inherit;
 }
-
+.bg-green {
+	background-color: #119549;
+}
+.text-green {
+	color: #119549;
+}
 .close {
 	margin-top: -3px;
 }
@@ -39,4 +50,26 @@ a:hover {
 	position: absolute;
 	right: 10px;
 	top: 7px;
+}
+/* Login card size*/
+.login,
+.signup {
+	width: 100%;
+	max-width: 350px;
+}
+.border-top-green {
+	border-top: 3px solid #119549;
+}
+.btn-green {
+	background-color: #119549;
+	color: #ffffff;
+}
+.btn-green:hover{
+	background-color: #14AC53;
+	color: #ffffff;
+}
+.login .form-control:focus,
+.signup .form-control:focus {
+	border-color: #ced4da;
+	box-shadow: 0 0 0.2rem 0.2rem rgba(17,149,73, 0.35);
 }

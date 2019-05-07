@@ -23,10 +23,10 @@ class m_login extends CI_Model
 
 	public function tampil_data_anggota()
 	{
-		$this->db->order_by('level');
+		$this->db->order_by('LOWER(level)','desc');
 		$sql = $this->db->get('anggota');
 
-		if ($this->db->affected_rows() >= 0) {
+		if ($this->db->affected_rows() > 0) {
 			return $sql->result();
 		} else {
 			return false;
@@ -45,7 +45,10 @@ class m_login extends CI_Model
 
 	public function tampil_data_simpanan()
 	{
-		$sql = $this->db->get('simpanan');
+		$this->db->select('a.nama, s.jumlah, s.status, s.tanggal');
+		$this->db->from('simpanan as s');
+		$this->db->join('anggota as a','a.id_anggota = s.id_anggota');
+		$sql = $this->db->get();
 
 		if ($this->db->affected_rows() > 0) {
 			return $sql->result();
@@ -65,7 +68,10 @@ class m_login extends CI_Model
 
 	public function tampil_data_pinjaman()
 	{
-		$sql = $this->db->get('pinjaman');
+		$this->db->select('a.nama, p.jumlah, p.status, p.tanggal');
+		$this->db->from('pinjaman as p');
+		$this->db->join('anggota as a','a.id_anggota = p.id_anggota');
+		$sql = $this->db->get();
 
 		if ($this->db->affected_rows() > 0) {
 			# code...

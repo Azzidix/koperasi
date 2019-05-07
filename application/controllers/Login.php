@@ -37,7 +37,7 @@ class Login extends CI_Controller {
 			redirect('dashboard');
 		} else {
 			# code...
-			$this->session->set_flashdata('login_message', 'gagal');
+			$this->session->set_flashdata('message', 'gagal');
 			redirect('login');
 		}
 	}
@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 	public function logout()
 	{
 		if ($this->session->sess_destroy(array('ci_nama','ci_level')));
-		$this->session->set_flashdata('logout_message', 'berhasil');
+		$this->session->set_flashdata('message', 'berhasil');
 		redirect('login');
 	}
 }

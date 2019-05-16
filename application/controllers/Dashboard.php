@@ -1,18 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
-{
+class Dashboard extends CI_Controller {
 	
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();	
 		$this->load->library('session');
 		$this->load->model('m_login','mdata');
 	}
 
-	public function index()
-	{
+	public function index() {
 		if ($this->session->userdata('ci_nama') != '') {
 			$this->load->view('admin/index');	
 		} else {
@@ -21,19 +18,16 @@ class Dashboard extends CI_Controller
 		
 	}
 
-	public function data_anggota()
-	{
+	public function data_anggota() {
 		$data['anggota'] = $this->mdata->tampil_data_anggota();
 		$this->load->view('admin/pages/data-anggota',$data);
 		return $data;
 	}
 
-	public function tambah_anggota()
-	{
+	public function tambah_anggota() {
 		$this->load->view('admin/pages/tambah-anggota');
 		$tambah = $this->input->post('simpan');
-		if (isset($tambah))	
-		{
+		if (isset($tambah))	{
 			$data = array(
 					'nama' => $this->input->post('nama'),
 					'alamat' => $this->input->post('alamat'),
@@ -52,25 +46,23 @@ class Dashboard extends CI_Controller
 		}
 	}
 
-	public function data_simpanan()
-	{
+	public function data_simpanan() {
 		$data['simpanan'] = $this->mdata->tampil_data_simpanan();
 		$this->load->view('admin/pages/data-simpanan',$data);
 	}
 
-	public function tambah_simpanan()
-	{
+	public function tambah_simpanan() {
 		$this->load->view('admin/pages/tambah-simpanan');
 	}
 
-	public function data_pinjaman()
-	{
+	public function data_pinjaman() {
 		$data['pinjaman'] = $this->mdata->tampil_data_pinjaman();
 		$this->load->view('admin/pages/data-pinjaman',$data);
 	}
 
-	public function tambah_pinjaman()
-	{
+	public function tambah_pinjaman() {
 		$this->load->view('admin/pages/tambah-pinjaman');
 	}
+
+	
 }

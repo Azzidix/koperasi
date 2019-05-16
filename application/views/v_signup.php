@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="<?=base_url('/assets/bootstrap/css/bootstrap.min.css')?>">
     <!-- Load Font Awesome -->
     <link rel="stylesheet" href="<?=base_url('/assets/font-awesome-4.7.0/css/font-awesome.min.css')?>">
+    <!-- Jquery Ui -->
+    <link rel="stylesheet" href="<?=base_url('/assets/jquery-ui/jquery-ui.min.css')?>">
     <!-- Load Custom Css -->
     <link rel="stylesheet" href="<?=base_url('/assets/style/style.css')?>">
 </head>
@@ -48,25 +50,35 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                         <strong>Aktifasi Berhasil!</strong>
                                     </div>';
+                            }   else if ($this->session->userdata('message') == 'none') {
+                                echo '<div class="alert alert-warning">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <strong>Akun Tidak Terdaftar!</strong>
+                                    </div>';
+                            }  else if ($this->session->userdata('message') == 'aktif') {
+                                echo '<div class="alert alert-warning">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <strong>Akun Sudah Teraktivasi!</strong>
+                                    </div>';
                             }
                             ?>
                             <div class="login-title">
                                 <h5>Aktifasi Akun</h5>
                             </div>
                             <div class="login-form mt-4">
-                                <form>
+                                <form method="POST" action="<?=site_url('login/aktivasi')?>">
                                     <div class="form-row">
                                         <div class="form-group col-md-12 p-0 text-left">
                                             <input id="nama" name="nama" placeholder="Nama Lengkap" class="form-control" type="text">
-                                            <span class="text-danger err-msg-1 small"><i> Masukan Nama Anda</i></span>
+                                            <span class="text-danger err-msg-1 small d-none"><i> Masukan Nama Anda</i></span>
                                         </div>
                                         <div class="form-group col-md-12 p-0 text-left">
-                                            <input id="user" name="user" placeholder="Username" class="form-control" type="text">
-                                            <span class="text-danger err-msg-2 small"><i> Masukan Username Anda</i></span>
+                                            <input id="user" name="username" placeholder="Username" class="form-control" type="text">
+                                            <span class="text-danger err-msg-2 small d-none"><i> Masukan Username Anda</i></span>
                                         </div>
                                         <div class="form-group col-md-12 p-0 text-left">
-                                            <input class="form-control" type="password" name="password"  placeholder="Password" id="pass">
-                                            <span class="text-danger err-msg-3 small" ><i> Masukan Password Anda</i></span>
+                                            <input class="form-control" type="password" name="password" placeholder="Password" id="pass">
+                                            <span class="text-danger err-msg-3 small d-none"><i> Masukan Password Anda</i></span>
                                             <span class="show-pass text-muted" id="btnShowPass"><i class="fa fa-eye-slash"></i></span>
                                         </div>
                                         
@@ -77,7 +89,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <button type="button" class="btn btn-green btn-block" id="btnAktifasi">Aktivasi</button>
+                                        <button type="submit" class="btn btn-green btn-block" id="btnAktifasi">Aktivasi</button>
                                     </div>
                                 </form>
                             </div>
@@ -99,6 +111,7 @@
     </div>
     <!-- Load javascript jquery -->
     <script src="<?=base_url('/assets/jquery/dist/jquery.min.js')?>"></script>
+    <script src="<?=base_url('/assets/jquery-ui/jquery-ui.min.js')?>"></script>
     <!-- Load javascript popper -->
     <!-- <script src="assets/popper/dist/popper.min.js"></script> -->
     <!-- Load javascript bootstrap -->
@@ -108,38 +121,38 @@
         $('#btnShowPass').on('click', function() {
             if($('#pass').attr('type') == 'password') {
                 $('#pass').attr('type','text');
-                if($('#btnShowPass').html('<i class="fa fa-eye"></i>'));
+                $('#btnShowPass').html('<i class="fa fa-eye"></i>');
 
             } else {
                 $('#pass').attr('type','password');
-                if($('#btnShowPass').html('<i class="fa fa-eye-slash"></i>'));
+                $('#btnShowPass').html('<i class="fa fa-eye-slash"></i>');
             }
         });
         $('#nama').on('change input kydown', function() {
             if($('#nama').val() === '') {
-                $('.err-msg-1').show();
-                if($('#nama').css('border','1px solid red'));
+                $('.err-msg-1').removeClass('d-none');
+                $('#nama').css('border','1px solid red');
             } else {
                 $('.err-msg-1').hide();
-                if($('#nama').css('border','1px solid #ced4da'));
+                $('#nama').css('border','1px solid #ced4da');
             }
         });
         $('#user').on('change input kydown', function() {
             if($('#user').val() === '') {
-                $('.err-msg-2').show();
-                if($('#user').css('border','1px solid red'));
+                $('.err-msg-2').removeClass('d-none');
+                $('#user').css('border','1px solid red');
             } else {
-                $('.err-msg-2').hide();
-                if($('#user').css('border','1px solid #ced4da'));
+                $('.err-msg-2').addClass('d-none')
+                $('#user').css('border','1px solid #ced4da');
             }
         });
         $('#pass').on('change input kydown', function() {
             if($('#pass').val() === '') {
-                $('.err-msg-3').show();
-                if($('#pass').css('border','1px solid red'));
+                $('.err-msg-3').removeClass('d-none');
+                $('#pass').css('border','1px solid red');
             } else {
-                $('.err-msg-3').hide();
-                if($('#pass').css('border','1px solid #ced4da'));
+                $('.err-msg-3').addClass('d-none');
+                $('#pass').css('border','1px solid #ced4da');
             }
         });
         
@@ -149,6 +162,16 @@
                     $('#btnAktifasi').html('Aktifasi');
             }, 10000);
             
+            
+        });
+        $(document).ready(function() {
+            $('#nama').autocomplete({
+                source: "<?php echo site_url('login/get_user_autocomplete');?>",
+     
+                select: function (event, ui) {
+                    $('[name="nama"]').val(ui.item.label); 
+                }
+            });
             
         });
     </script>

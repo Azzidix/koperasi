@@ -60,11 +60,11 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12 p-0 text-left">
                                             <input class="form-control" type="text" name="username" placeholder="Username" id="user">
-                                            <span class="text-danger err-msg-1 small"><i> Masukan Username Anda</i></span>
+                                            <span class="text-danger err-msg-1 small d-none"><i> Masukan Username Anda</i></span>
                                         </div>
                                         <div class="form-group col-md-12 p-0 text-left">
                                             <input class="form-control" type="password" name="password" placeholder="Password" id="pass">
-                                            <span class="text-danger err-msg-2 small"><i> Masukan Password Anda</i></span>
+                                            <span class="text-danger err-msg-2 small d-none"><i> Masukan Password Anda</i></span>
                                             <span class="show-pass text-muted" id="btnShowPass"><i class="fa fa-eye-slash"></i></span>
                                         </div>
                                     </div>
@@ -119,19 +119,19 @@
     });
     $('#user').on('change input kydown', function() {
         if ($('#user').val() === '') {
-            $('.err-msg-1').show();
+            $('.err-msg-1').removeClass('d-none')
             if ($('#user').css('border', '1px solid red'));
         } else {
-            $('.err-msg-1').hide();
+            $('.err-msg-1').addClass('d-none')
             if ($('#user').css('border', '1px solid #ced4da'));
         }
     });
     $('#pass').on('change input kydown', function() {
         if ($('#pass').val() === '') {
-            $('.err-msg-2').show();
+            $('.err-msg-2').removeClass('d-none')
             if ($('#pass').css('border', '1px solid red'));
         } else {
-            $('.err-msg-2').hide();
+            $('.err-msg-2').addClass('d-none')
             if ($('#pass').css('border', '1px solid #ced4da'));
         }
     });

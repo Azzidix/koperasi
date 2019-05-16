@@ -82,6 +82,16 @@ class m_login extends CI_Model {
 		}
 	}
 
+	public function tampil_data_shu() {
+		$sql = $this->db->get('shu');
+
+		if ($this->db->affected_rows() > 0) {
+			return $sql->result();
+		} else {
+			return false;
+		}
+	}
+
 	public function cek_aktivasi($data) {
 		$this->db->where('nama', $data);
 		$sql = $this->db->get('anggota');

@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller {
 
 	public function data_anggota() {
 		$data['anggota'] = $this->mdata->tampil_data_anggota();
-		$this->load->view('admin/pages/data-anggota',$data);
+		$this->load->view('admin/anggota/data',$data);
 		return $data;
 	}
 
@@ -48,7 +48,7 @@ class Dashboard extends CI_Controller {
 
 	public function data_simpanan() {
 		$data['simpanan'] = $this->mdata->tampil_data_simpanan();
-		$this->load->view('admin/pages/data-simpanan',$data);
+		$this->load->view('admin/simpanan/data',$data);
 	}
 
 	public function tambah_simpanan() {
@@ -57,11 +57,16 @@ class Dashboard extends CI_Controller {
 
 	public function data_pinjaman() {
 		$data['pinjaman'] = $this->mdata->tampil_data_pinjaman();
-		$this->load->view('admin/pages/data-pinjaman',$data);
+		$this->load->view('admin/pinjaman/data',$data);
 	}
 
 	public function tambah_pinjaman() {
 		$this->load->view('admin/pages/tambah-pinjaman');
+	}
+
+	public function data_shu() {
+		$data['shu'] = $this->mdata->tampil_data_shu();
+		$this->load0>view('admin/shu/data',$data);
 	}
 
 	

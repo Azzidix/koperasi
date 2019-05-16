@@ -50,6 +50,30 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Keuntungan
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsekeuntungan"
+                    aria-expanded="true" aria-controls="collapsekeuntungan">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Keuntungan</span>
+                </a>
+                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Keuntungan</h6>
+                        <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_keuntungan')?>">Tambah</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_keuntungan')?>">Laporan</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -61,15 +85,16 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseanggota"
+                    aria-expanded="true" aria-controls="collapseanggota">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Anggota</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseanggota" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Anggota</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_anggota')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_anggota')?>">Tambah</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/laporan_anggota')?>">Laporan</a>
                     </div>
                 </div>
@@ -95,6 +120,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Simpanan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_simpanan')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_simpanan')?>">Simpan</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/laporan_simpanan')?>">Laporan</a>
                     </div>
                 </div>
@@ -119,6 +145,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pinjaman</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_pinjaman')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_pinjaman')?>">Pinjam</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/laporan_pinjaman')?>">Laporan</a>
                     </div>
                 </div>
@@ -336,7 +363,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
                                 <img class="img-profile rounded-circle"
                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
@@ -356,7 +383,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="<?=base_url('login/logout')?>">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

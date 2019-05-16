@@ -399,50 +399,73 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Anggota</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Anggota</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+                            <h6 class="m-0 font-weight-bold text-primary">Tambah Anggota</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Jumlah</th>
-                                            <th>Tanggal</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Jumlah</th>
-                                            <th>Tanggal</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php foreach($pinjaman as $row) {
-                     
-                      ?>
-                                        <tr>
-                                            <td><?=$row->nama?></td>
-                                            <td><?=$row->jumlah?></td>
-                                            <td><?=$row->jumlah?></td>
-                                            <td><?=$row->jumlah?></td>
-                                            <td><?=$row->jumlah?></td>
-                                        </tr>
-                                        <?php } ?>
-
-                                    </tbody>
-                                </table>
+                            <div class="tambah-anggota">
+                                <div class="message">
+                                    <?php
+                                        if ($this->session->userdata('message') == 'gagal') {
+                                            echo '<div class="alert alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Gagal Menambahkan Anggota</strong>
+                                                </div>';
+                                        }  else if ($this->session->userdata('message') == 'berhasil') {
+                                            echo '<div class="alert alert-success">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Anggota Berhasil Ditambahkan</strong>
+                                                </div>';
+                                        }
+                                    ?>
+                                </div>
+                                <form action="<?=base_url('dashboard/tambah_anggota')?>" method="post">
+                                    <div class="form-group">
+                                    <label for="nama">Nama Lengkap</label>
+                                    <input type="text" name="nama" id="" class="form-control" placeholder="" aria-describedby="msg1">
+                                    <small id="msg1" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="nama">Jenis Akun</label>
+                                        <select class="form-control" name="level" id="">
+                                        <option value="1">Anggota</option>
+                                        <option value="0">Admin</option>
+                                        <option value="2">Pengurus</option>
+                                        </select>
+                                    <small id="msg2" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="nama">Jenis Kelamin</label>
+                                        <select class="form-control" name="jenis_kelamin" id="">
+                                            <option value="L">Laki-Laki</option>
+                                            <option value="P">Perempuan</option>
+                                        </select>
+                                        <small id="msg3" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Tanggal Lahir</label>
+                                        <input type="date" name="tanggal_lahir" id="" class="form-control" placeholder="" aria-describedby="msg4">
+                                        <small id="msg4" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">Alamat</label>
+                                        <input type="text" name="alamat" id="" class="form-control" placeholder="" aria-describedby="msg5">
+                                        <small id="msg5" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama">No Telpon</label>
+                                        <input type="text" name="no_telpon" id="" class="form-control" placeholder="" aria-describedby="msg6">
+                                        <small id="msg6" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" name="simpan" class="btn btn-info">Tambah</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

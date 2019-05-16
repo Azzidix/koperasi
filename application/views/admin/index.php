@@ -47,6 +47,30 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Keuntungan
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsekeuntungan"
+                    aria-expanded="true" aria-controls="collapsekeuntungan">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Keuntungan</span>
+                </a>
+                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Keuntungan</h6>
+                        <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_keuntungan')?>">Tambah</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_keuntungan')?>">Laporan</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -58,15 +82,16 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseanggota"
+                    aria-expanded="true" aria-controls="collapseanggota">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Anggota</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseanggota" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Anggota</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_anggota')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_anggota')?>">Tambah</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/laporan_anggota')?>">Laporan</a>
                     </div>
                 </div>
@@ -87,10 +112,12 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Simpanan</span>
                 </a>
-                <div id="collpasesimpanan" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collpasesimpanan" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Simpanan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_simpanan')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_simpanan')?>">Simpan</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/laporan_simpanan')?>">Laporan</a>
                     </div>
                 </div>
@@ -110,16 +137,18 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pinjaman</span>
                 </a>
-                <div id="collpasepinjaman" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collpasepinjaman" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pinjaman</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_pinjaman')?>">Data</a>
+                        <a class="collapse-item" href="<?=base_url('dashboard/form_pinjaman')?>">Pinjam</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/laporan_pinjaman')?>">Laporan</a>
                     </div>
                 </div>
             </li>
-             <!-- Divider -->
-             <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -384,7 +413,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Anggota</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?=$totalagt?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fa fa-user fa-2x text-gray-300"></i>
@@ -402,7 +431,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Simpanan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.0</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?=$totalsmp[0]->jml?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

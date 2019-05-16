@@ -18,6 +18,53 @@ class m_login extends CI_Model {
 		}
 	}
 
+	public function id_anggota() {
+		$sql = $this->db->query('SELECT MAX(RIGHT(id_anggota,4)) as id FROM anggota');
+		$idk = '';
+		if ($sql->num_rows() > 0) {
+			foreach ($sql->result() as $d) {
+				$tmp = ((int)$d->id)+1;
+				$idk = sprintf("%04s", $tmp);
+			}
+		} else {
+			$idk = "0001";
+		}
+		date_default_timezone_set('Asia/Jakarta');
+		return date('dmy').$idk;
+	}
+
+	public function cek_id_anggota($nama) {
+		$this->db->where('nama', $nama);
+		$sql = $this->db->get('anggota');
+		if ($this->db->affected_rows() > 0) {
+			foreach ($sql->result() as $key) {
+				return $key->id_anggota;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public function show_edit_anggota($id) {
+		$this->db->where('id', $id);
+		$sql = $this->db->get('anggota');
+		if($this->db->affected_rows() > 0) {
+			return $sql->result();
+		} else {
+			return false;
+		}
+	}
+
+	public function update_anggota($data,$id) {
+		$this->db->where('id', $id);
+		$sql = $this->db->update('anggota', $data);
+		if($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function tampil_data_anggota() {
 		$this->db->order_by('LOWER(level)','desc');
 		$sql = $this->db->get('anggota');
@@ -31,6 +78,16 @@ class m_login extends CI_Model {
 
 	public function tambah_anggota($data) {
 		$sql = $this->db->insert('anggota', $data);
+		if ($this->db->affected_rows() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function hapus_anggota($id) {
+		$this->db->where('id', $id);
+		$sql = $this->db->delete('anggota');
 		if ($this->db->affected_rows() > 0) {
 			return true;
 		} else {
@@ -127,6 +184,30 @@ class m_login extends CI_Model {
 			return $sql;
 		} else {
 			return $sql;
+		}
+	}
+
+	public function total_anggota() {
+		
+		$sql = $this->db->get('anggota');
+		if ($sql) {
+			return $sql->num_rows();
+		}
+	}
+
+	public function total_simpanan() {
+		
+		$sql = $this->db->query('SELECT sum(jumlah) as jml FROM simpanan');
+		if ($sql) {
+			return $sql->result();
+		}
+	}
+
+	public function total_pinjaman() {
+		
+		$sql = $this->db->get('anggota');
+		if ($sql) {
+			return $sql->num_rows();
 		}
 	}
 }

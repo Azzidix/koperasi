@@ -399,76 +399,36 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Data Anggota</h1>
+                    <h1 class="h3 mb-2 text-gray-800">SHU</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+                            <h6 class="m-0 font-weight-bold text-primary">Data SHU</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>Kelamin</th>
-                                            <th>Umur</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>Kelamin</th>
-                                            <th>Umur</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php foreach($anggota as $row) {
-                     
-                      ?>
-                                        <tr>
-                                            <td><?=$row->nama?></td>
-                                            <td><?=$row->alamat?></td>
-                                            <td>
-                                                <?php 
-                        if ($row->jenis_kelamin == 'L') {
-                          echo 'Laki-Laki';
-                        } elseif ($row->jenis_kelamin == 'P') {
-                          echo 'Perempuan';
-                        }
-                      ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                        $tgl_lhr = new Datetime($row->tanggal_lahir);
-                        $today = new DateTime('today');
-                        echo $today->diff($tgl_lhr)->y;
-                       ?>
-                                            </td>
-                                            <td>
-                                                <?php 
-                        if ($row->status == 0) {
-                            echo '<span class="badge badge-danger">Belum Aktivasi</span>';
-                        } elseif ($row->status == 1) {
-                            echo '<span class="badge p-2 badge-success">Aktif</span>';
-                        }
-                      ?>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <?php } ?>
-
-                                    </tbody>
-                                </table>
+                            <div class="form-group">
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" name="nama" id="" class="form-control" placeholder="" aria-describedby="msg1">
+                                <small id="msg1" class="text-muted">Help text</small>
                             </div>
+                            <hr>
+                            <?php 
+                                $jumlah_total = $shu->jml;
+                                $jumlah_agoota = $tanggo->jml; 
+                                $keuntungan = ($totung->jml * 40) / 100;
+                                $jumlah = ($jumlah_total / $jumlah_agoota) * $keuntungan;
+                                $data = "";
+                                $data .= "
+                                    Total Simpanan : Rp.$jumlah_total <br>
+                                    Total Simpanan Anggota : Rp.$jumlah_agoota <br>
+                                    Keuntungan : Rp.$keuntungan <br>
+
+                                ";
+                                echo($data);
+                                echo "<p class=text-right>Total Keuntungan Anda : Rp.$jumlah</p>";
+                            ?>
                         </div>
                     </div>
 

@@ -27,7 +27,8 @@ class Login extends CI_Controller {
 			foreach ($sql as $key) {
 				$session = array(
 						'ci_nama' => $key->nama,
-						'ci_level' => $key->level
+						'ci_level' => $key->level,
+						'ci_id' => $key->id_anggota
 					);
 				$this->session->set_userdata($session);
 			}

@@ -421,30 +421,30 @@
                                         }  else if ($this->session->userdata('message') == 'berhasil') {
                                             echo '<div class="alert alert-success">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                    <strong>Pinjaman Berhasil Ditambahkan</strong>
+                                                    <strong>Simpanan Berhasil Pinjaman</strong>
                                                 </div>';
                                         }
                                     ?>
                                 </div>
-                                <form action="<?=base_url('dashboard/tambah_pinjaman')?>" method="post">
+                                <form action="<?=base_url('dashboard/tambah_simpanan')?>" method="post">
                                     <div class="form-group">
                                         <label for="nama">Nama Lengkap</label>
                                         <input type="text" name="nama" id="nama" class="form-control" placeholder="" aria-describedby="msg1">
                                         <small id="msg1" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                    <label for="nama">Jenis</label>
-                                        <select class="form-control" name="level" id="">
-                                        <option value="1">6 Bulan -> 2%</option>
-                                        <option value="2">1 Tahun -> 4%</option>
-                                        <option value="3">2 Tahun -> 6%</option>
-                                        </select>
-                                    <small id="msg2" class="text-muted">Help text</small>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="nama">Jumlah</label>
                                         <input type="text" name="jumlah" id="" class="form-control" placeholder="" aria-describedby="msg6">
                                         <small id="msg6" class="text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="nama">Jenis Pinjaman</label>
+                                        <select class="form-control" name="level" id="">
+                                        <option value="1">6 Bulan 2%</option>
+                                        <option value="0">1 Tahun 3%</option>
+                                        <option value="2">2 Tahun 4%</option>
+                                        </select>
+                                    <small id="msg2" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" name="simpan" class="btn btn-info">simpan</button>
@@ -527,6 +527,9 @@
                     $('[name="nama"]').val(ui.item.label); 
                 }
             });
+            setTimeout(function() {
+                $('.alert').remove();
+            }, 5000);
         });
     </script>
 

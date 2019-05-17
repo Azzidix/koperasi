@@ -7,17 +7,22 @@ class Dashboard extends CI_Controller {
 		parent::__construct();	
 		$this->load->library('session');
 		$this->load->model('m_login','mdata');
+		if ($this->session->userdata('ci_level') == 1) {
+			redirect('anggota');
+		}
 	}
 
 	public function index() {
-		$data['totalagt'] = $this->mdata->total_anggota();
-		$data['totalsmp'] = $this->mdata->total_simpanan();
-		if ($this->session->userdata('ci_nama') != '') {
-			$this->load->view('admin/index', $data);	
-		} else {
-			redirect('login');
-		}
-		
+		if ($this->session->userdata('ci_level') == 2) {
+			$data['totalagt'] = $this->mdata->total_anggota();
+			$data['totalsmp'] = $this->mdata->total_simpanan();
+			$data['totalkeut'] = $this->mdata->total_keuntungan();
+			if ($this->session->userdata('ci_nama') != '') {
+				$this->load->view('admin/index', $data);	
+			} else {
+				redirect('login');
+			}
+		} 
 	}
 
 	public function id_anggota() {
@@ -69,7 +74,8 @@ class Dashboard extends CI_Controller {
 		$data = $this->mdata->show_edit_anggota($id);
 		echo json_encode($data);
 	}
-
+	/* End ANggota */
+	/* Simpanan */
 	public function data_simpanan() {
 		$data['simpanan'] = $this->mdata->tampil_data_simpanan();
 		$this->load->view('admin/simpanan/data',$data);
@@ -97,9 +103,46 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
+	public function edit_simpanan($id) {
+		$data = $this->mdata->edit_simpanan($id);
+		echo json_encode($data);
+	}
+
+	public function update_simpanan() {
+		$id = $this->input->post('id');
+		$data = array(
+			'id' => $id,
+			'jumlah' => $this->input->post('jumlah'),
+			'tanggal' => $this->input->post('tanggal'),
+
+		);
+		if($this->mdata->update_simpanan($data, $id) == true) {
+			$this->session->set_flashdata('message', 'updated');
+			redirect('dashboard/data_simpanan');
+		} else {
+			$this->session->set_flashdata('message', 'unupdated');
+			redirect('dashboard/data_simpanan');
+		}
+	}
+
+	public function hapus_simpanan($id) {
+		if ($this->mdata->hapus_simpanan($id) == true) {
+			$this->session->set_flashdata('message', 'deleted');
+			redirect('dashboard/data_simpanan');
+		} else {
+			$this->session->set_flashdata('message', 'undeleted');
+			redirect('dashboard/data_simpanan');
+		}
+	}
+	/* End Simpanan */
+	/* Pinjaman */
 	public function data_pinjaman() {
 		$data['pinjaman'] = $this->mdata->tampil_data_pinjaman();
 		$this->load->view('admin/pinjaman/data',$data);
+	}
+
+	public function form_pinjaman() {
+		$this->load->view('admin/pinjaman/tambah');
 	}
 
 	public function tambah_pinjaman() {
@@ -121,14 +164,78 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
-	public function form_pinjaman() {
-		$this->load->view('admin/pinjaman/tambah');
+	public function edit_pinjaman($id) {
+		$data = $this->mdata->edit_pinjaman($id);
+		echo json_encode($data);
 	}
-
+	/* End Pinjaman */
+	/* SHU */
 	public function data_shu() {
-		$data['shu'] = $this->mdata->tampil_data_shu();
-		$this->load0>view('admin/shu/data',$data);
+		$data['totung'] = $this->mdata->total_keuntungan();
+		$data['tanggo'] = $this->mdata->total_simpanan_anggota('1605190001');
+		$data['shu'] = $this->mdata->data_simpanan_anggota();
+		$this->load->view('admin/shu/data',$data);
+	}
+	/* End SHU */
+	/* Keuntungan */
+	public function data_keuntungan() {
+		$data['keuntungan'] = $this->mdata->tampil_data_keuntungan();
+		$this->load->view('admin/keuntungan/data', $data);
 	}
 
+	public function form_keuntungan() {
+		$this->load->view('admin/keuntungan/tambah');
+	}
+
+	public function tambah_keuntungan() {
+		$data = array(
+			'tanggal' =>$this->input->post('tanggal'),
+			'jumlah' => $this->input->post('jumlah')
+		);
+		if ($this->mdata->tambah_keuntungan($data) == true) {
+			$this->session->set_flashdata('message', 'berhasil');
+			redirect('dashboard/form_keuntungan');
+		} else {
+			$this->session->set_flashdata('message', 'gagal');
+			redirect('dashboard/form_keuntungan');
+		}
+	}
+
+	public function laporan_keuntungan() {
+		$this->load->view('admin/keuntungan/laporan');
+	}
+
+	public function edit_keuntungan($id) {
+		$data = $this->mdata->edit_keuntungan($id);
+		echo json_encode($data);
+	}
+
+	public function update_keuntungan() {
+		$id = $this->input->post('id');
+		$data = array(
+			'id_anggota' => $id,
+			'jumlah' => $this->input->post('jumlah'),
+			'tanggal' => $this->input->post('tanggal'),
+
+		);
+		if($this->mdata->update_keuntungan($data, $id) == true) {
+			$this->session->set_flashdata('message', 'updated');
+			redirect('dashboard/data_keuntungan');
+		} else {
+			$this->session->set_flashdata('message', 'unupdated');
+			redirect('dashboard/data_keuntungan');
+		}
+	}
+
+	public function hapus_keuntungan($id) {
+		if ($this->mdata->hapus_keuntungan($id) == true) {
+			$this->session->set_flashdata('message', 'deleted');
+			redirect('dashboard/data_keuntungan');
+		} else {
+			$this->session->set_flashdata('message', 'undeleted');
+			redirect('dashboard/data_keuntungan');
+		}
+	}
+	/* End Keuntungan */
 	
 }

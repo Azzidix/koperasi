@@ -507,7 +507,7 @@
               <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">sm</h5>
+                    <h5 class="modal-title">Edit Anggota</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -623,33 +623,36 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
     <script>
-      $(document).ready(function() {
-        $('.action').on('click','#edit',  function() {
-        var id = $(this).attr('data');
-        
-        $.ajax({
-          type: "GET",
-          dataType: "JSON",
-          url: "http://localhost/dashboard/edit_anggota/"+ id,
-          data: "",
-          success: function (response) {
-            $(response).each(function (index, element) {
-              // element == this
-              $('#nama').val(element.nama);
-              $('#almt').val(element.alamat);
-              $('#notl').val(element.no_telpon);
-              $('#jk').val(element.jenis_kelamin);
-              $('#level').val(element.level);
-              $('#tl').val(element.tanggal_lahir);
-              
-              
+        $(document).ready(function() {
+            $('.action').on('click','#edit',  function() {
+                var id = $(this).attr('data');
+            
+                $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: "http://localhost/dashboard/edit_anggota/"+ id,
+                data: "",
+                success: function (response) {
+                    $(response).each(function (index, element) {
+                    // element == this
+                    $('#nama').val(element.nama);
+                    $('#almt').val(element.alamat);
+                    $('#notl').val(element.no_telpon);
+                    $('#jk').val(element.jenis_kelamin);
+                    $('#level').val(element.level);
+                    $('#tl').val(element.tanggal_lahir);
+                    
+                    
+                    });
+                
+                
+                }
             });
-            
-            
-          }
         });
-      });
-      
+        
+        setTimeout(function() {
+            $('.alert').remove();
+        }, 5000);
       });
     </script>
 </body>

@@ -22,8 +22,6 @@
 
     <!-- Custom styles for this page -->
     <link href="<?=base_url()?>/admin/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-     <!-- Jquery Ui -->
-     <link rel="stylesheet" href="<?=base_url('/assets/jquery-ui/jquery-ui.min.css')?>">
 
 </head>
 
@@ -401,13 +399,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Simpanan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Anggota</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tambah Simpanan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Tambah Anggota</h6>
                         </div>
                         <div class="card-body">
                             <div class="tambah-anggota">
@@ -416,29 +414,29 @@
                                         if ($this->session->userdata('message') == 'gagal') {
                                             echo '<div class="alert alert-danger">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                    <strong>Gagal Menambahkan Simpanan</strong>
+                                                    <strong>Gagal Menambahkan Keuntungan</strong>
                                                 </div>';
                                         }  else if ($this->session->userdata('message') == 'berhasil') {
                                             echo '<div class="alert alert-success">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                    <strong>Simpanan Berhasil Ditambahkan</strong>
+                                                    <strong>Keuntungan Berhasil Ditambahkan</strong>
                                                 </div>';
                                         }
                                     ?>
                                 </div>
-                                <form action="<?=base_url('dashboard/tambah_simpanan')?>" method="post">
+                                <form action="<?=base_url('dashboard/tambah_keuntungan')?>" method="post">
                                     <div class="form-group">
-                                        <label for="nama">Nama Lengkap</label>
-                                        <input type="text" name="nama" id="nama" class="form-control" placeholder="" aria-describedby="msg1">
-                                        <small id="msg1" class="text-muted">Help text</small>
+                                    <label for="nama">Jumlah</label>
+                                    <input type="text" name="jumlah" id="" class="form-control" placeholder="" aria-describedby="msg1">
+                                    <small id="msg1" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="nama">Jumlah</label>
-                                        <input type="text" name="jumlah" id="" class="form-control" placeholder="" aria-describedby="msg6">
-                                        <small id="msg6" class="text-muted">Help text</small>
+                                        <label for="nama">Tanggal Lahir</label>
+                                        <input type="date" name="tanggal" id="" class="form-control" placeholder="" aria-describedby="msg4">
+                                        <small id="msg4" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" name="simpan" class="btn btn-info">simpan</button>
+                                        <button type="submit" name="simpan" class="btn btn-info">Tambah</button>
                                     </div>
                                 </form>
                             </div>
@@ -494,7 +492,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url()?>/admin/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="<?=base_url('/assets/jquery-ui/jquery-ui.min.js')?>"></script>
     <script src="<?=base_url()?>/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -509,15 +506,9 @@
 
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('#nama').autocomplete({
-                source: "<?php echo site_url('login/get_user_autocomplete');?>",
-     
-                select: function (event, ui) {
-                    $('[name="nama"]').val(ui.item.label); 
-                }
-            });
             setTimeout(function() {
                 $('.alert').remove();
             }, 5000);

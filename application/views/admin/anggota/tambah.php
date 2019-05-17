@@ -533,6 +533,13 @@
 
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').remove();
+            }, 5000);
+        });
+    </script>
 
 </body>
 

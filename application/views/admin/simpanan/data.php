@@ -401,6 +401,31 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data Simpanan</h6>
                         </div>
                         <div class="card-body">
+                        <div class="message">
+                                    <?php
+                                        if ($this->session->userdata('message') == 'undeleted') {
+                                            echo '<div class="alert alert-warning">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Gagal Hapus Simpanan</strong>
+                                                </div>';
+                                        }  else if ($this->session->userdata('message') == 'deleted') {
+                                            echo '<div class="alert alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Simpanan Berhasil Dihapus</strong>
+                                                </div>';
+                                        } else if ($this->session->userdata('message') == 'unupdated') {
+                                            echo '<div class="alert alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Gagal Update Simpanan</strong>
+                                                </div>';
+                                        } else if ($this->session->userdata('message') == 'updated') {
+                                            echo '<div class="alert alert-success">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Simpanan Berhasil Diupdate</strong>
+                                                </div>';
+                                        }
+                                    ?>
+                                </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -408,7 +433,6 @@
                                             <th>Nama</th>
                                             <th>Jumlah</th>
                                             <th>Tanggal</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -417,7 +441,6 @@
                                             <th>Nama</th>
                                             <th>Jumlah</th>
                                             <th>Tanggal</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -429,8 +452,10 @@
                                             <td><?=$row->nama?></td>
                                             <td><?=$row->jumlah?></td>
                                             <td><?=$row->tanggal?></td>
-                                            <td><?=$row->status?></td>
-                                            <td></td>
+                                            <td>
+                                                <a href="<?php echo base_url('dashboard/hapus_simpanan/').$row->id;?>" class="btn btn-sm btn-danger p-1 m-1"><i class="fa fa-trash"></i></a>
+                                                <button class="btn btn-sm btn-info p-1 m-1 editData" data="<?=$row->id?>" data-toggle="modal" data-target="#modelId"><i class="fa fa-edit"></i></button>
+                                            </td>
                                         </tr>
                                         <?php } }?>
 
@@ -503,6 +528,13 @@
 
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').remove();
+            }, 5000);
+        });
+    </script>
 </body>
 
 </html>

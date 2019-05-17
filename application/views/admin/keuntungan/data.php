@@ -22,8 +22,6 @@
 
     <!-- Custom styles for this page -->
     <link href="<?=base_url()?>/admin/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-     <!-- Jquery Ui -->
-     <link rel="stylesheet" href="<?=base_url('/assets/jquery-ui/jquery-ui.min.css')?>">
 
 </head>
 
@@ -401,48 +399,112 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Simpanan</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Keuntungan</h1>
                     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tambah Simpanan</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Keuntungan</h6>
                         </div>
                         <div class="card-body">
-                            <div class="tambah-anggota">
-                                <div class="message">
+                        <div class="message">
                                     <?php
-                                        if ($this->session->userdata('message') == 'gagal') {
+                                        if ($this->session->userdata('message') == 'undeleted') {
+                                            echo '<div class="alert alert-warning">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Gagal Hapus Keuntungan</strong>
+                                                </div>';
+                                        }  else if ($this->session->userdata('message') == 'deleted') {
                                             echo '<div class="alert alert-danger">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                    <strong>Gagal Menambahkan Simpanan</strong>
+                                                    <strong>Keuntungan Berhasil Dihapus</strong>
                                                 </div>';
-                                        }  else if ($this->session->userdata('message') == 'berhasil') {
+                                        } else if ($this->session->userdata('message') == 'unupdated') {
+                                            echo '<div class="alert alert-danger">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                    <strong>Gagal Update Keuntungan</strong>
+                                                </div>';
+                                        } else if ($this->session->userdata('message') == 'updated') {
                                             echo '<div class="alert alert-success">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                    <strong>Simpanan Berhasil Ditambahkan</strong>
+                                                    <strong>Keuntungan Berhasil Diupdate</strong>
                                                 </div>';
                                         }
                                     ?>
                                 </div>
-                                <form action="<?=base_url('dashboard/tambah_simpanan')?>" method="post">
-                                    <div class="form-group">
-                                        <label for="nama">Nama Lengkap</label>
-                                        <input type="text" name="nama" id="nama" class="form-control" placeholder="" aria-describedby="msg1">
-                                        <small id="msg1" class="text-muted">Help text</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nama">Jumlah</label>
-                                        <input type="text" name="jumlah" id="" class="form-control" placeholder="" aria-describedby="msg6">
-                                        <small id="msg6" class="text-muted">Help text</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" name="simpan" class="btn btn-info">simpan</button>
-                                    </div>
-                                </form>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Jumlah</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Jumlah</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php 
+                                        if($keuntungan != false) {
+                                            foreach($keuntungan as $row) {
+                     
+                                        ?>
+                                        <tr>
+                                            <td><?=$row->tanggal?></td>
+                                            <td><?=$row->jumlah?></td>
+                                            <td></td>
+                                            <td>
+                                                <a href="<?php echo base_url('dashboard/hapus_keuntungan/').$row->id;?>" class="btn btn-sm btn-danger p-1 m-1"><i class="fa fa-trash"></i></a>
+                                                <button class="btn btn-sm btn-info p-1 m-1 editData" data="<?=$row->id?>" data-toggle="modal" data-target="#modelId"><i class="fa fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                        <?php } } ?>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Keuntungan</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="<?=base_url('dashboard/update_keuntungan')?>" method="post">
+                            <div class="form-group">
+                                <input type="text" name="id" id="id2" class="form-control" placeholder="" aria-describedby="msg0" hidden="">
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Jumlah</label>
+                                <input type="text" name="jumlah" id="jumlah" class="form-control" placeholder="" aria-describedby="msg1">
+                                <small id="msg1" class="text-muted">Help text</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Tanggal Lahir</label>
+                                <input type="date" name="tanggal" id="tanggal" class="form-control" placeholder="" aria-describedby="msg4">
+                                <small id="msg4" class="text-muted">Help text</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="update" class="btn btn-info">Simpan</button>
+                        </div>
+                        
+                        </form>
+                        </div>
+                    </div>
                     </div>
 
                 </div>
@@ -494,7 +556,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url()?>/admin/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="<?=base_url('/assets/jquery-ui/jquery-ui.min.js')?>"></script>
     <script src="<?=base_url()?>/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -511,17 +572,31 @@
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
     <script>
         $(document).ready(function() {
-            $('#nama').autocomplete({
-                source: "<?php echo site_url('login/get_user_autocomplete');?>",
-     
-                select: function (event, ui) {
-                    $('[name="nama"]').val(ui.item.label); 
-                }
+            $('.editData').on('click', function() {
+                var id = $(this).attr('data');
+                console.log('click'+id);
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost/dashboard/edit_keuntungan/"+ id,
+                    data: {},
+                    dataType: "JSON",
+                    success: function (response) {
+                        $.each(response, function (index, value) { 
+                            $('#id2').val(value.id);
+                            $('#jumlah').val(value.jumlah);
+                            $('#tanggal').val(value.tanggal);
+                        });
+                        
+                    }
+                });
             });
             setTimeout(function() {
                 $('.alert').remove();
             }, 5000);
+            
         });
+        
+        
     </script>
 
 </body>

@@ -13,17 +13,15 @@
 
     <!-- Custom fonts for this template -->
     <link href="<?=base_url()?>/admin/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?=base_url()?>/admin/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
     <link href="<?=base_url()?>/admin/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-     <!-- Jquery Ui -->
-     <link rel="stylesheet" href="<?=base_url('/assets/jquery-ui/jquery-ui.min.css')?>">
+    <!-- Jquery Ui -->
+    <link rel="stylesheet" href="<?=base_url('/assets/jquery-ui/jquery-ui.min.css')?>">
 
 </head>
 
@@ -67,7 +65,8 @@
                     <i class="fas fa-fw fa-user"></i>
                     <span>Keuntungan</span>
                 </a>
-                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Keuntungan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
@@ -365,7 +364,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
                                 <img class="img-profile rounded-circle"
                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
@@ -421,30 +421,32 @@
                                         }  else if ($this->session->userdata('message') == 'berhasil') {
                                             echo '<div class="alert alert-success">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                                    <strong>Simpanan Berhasil Pinjaman</strong>
+                                                    <strong>Pinjaman Berhasil</strong>
                                                 </div>';
                                         }
                                     ?>
                                 </div>
-                                <form action="<?=base_url('dashboard/tambah_simpanan')?>" method="post">
+                                <form action="<?=base_url('dashboard/tambah_pinjaman')?>" method="post">
                                     <div class="form-group">
                                         <label for="nama">Nama Lengkap</label>
-                                        <input type="text" name="nama" id="nama" class="form-control" placeholder="" aria-describedby="msg1">
+                                        <input type="text" name="nama" id="nama" class="form-control" placeholder=""
+                                            aria-describedby="msg1">
                                         <small id="msg1" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama">Jumlah</label>
-                                        <input type="text" name="jumlah" id="" class="form-control" placeholder="" aria-describedby="msg6">
+                                        <input type="text" name="jumlah" id="" class="form-control" placeholder=""
+                                            aria-describedby="msg6">
                                         <small id="msg6" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                    <label for="nama">Jenis Pinjaman</label>
-                                        <select class="form-control" name="level" id="">
-                                        <option value="1">6 Bulan 2%</option>
-                                        <option value="0">1 Tahun 3%</option>
-                                        <option value="2">2 Tahun 4%</option>
+                                        <label for="nama">Jenis Pinjaman</label>
+                                        <select class="form-control" name="jenis" id="">
+                                            <option value="1">6 Bulan 2%</option>
+                                            <option value="2">1 Tahun 3%</option>
+                                            <option value="3">2 Tahun 4%</option>
                                         </select>
-                                    <small id="msg2" class="text-muted">Help text</small>
+                                        <small id="msg2" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" name="simpan" class="btn btn-info">simpan</button>
@@ -519,18 +521,18 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#nama').autocomplete({
-                source: "<?php echo site_url('login/get_user_autocomplete');?>",
-     
-                select: function (event, ui) {
-                    $('[name="nama"]').val(ui.item.label); 
-                }
-            });
-            setTimeout(function() {
-                $('.alert').remove();
-            }, 5000);
+    $(document).ready(function() {
+        $('#nama').autocomplete({
+            source: "<?php echo site_url('login/get_user_autocomplete');?>",
+
+            select: function(event, ui) {
+                $('[name="nama"]').val(ui.item.label);
+            }
         });
+        setTimeout(function() {
+            $('.alert').remove();
+        }, 5000);
+    });
     </script>
 
 </body>

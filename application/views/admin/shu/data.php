@@ -23,6 +23,9 @@
     <!-- Custom styles for this page -->
     <link href="<?=base_url()?>/admin/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <!-- Jquery Ui -->
+    <link rel="stylesheet" href="<?=base_url('/assets/jquery-ui/jquery-ui.min.css')?>">
+
 </head>
 
 <body id="page-top">
@@ -65,7 +68,8 @@
                     <i class="fas fa-fw fa-user"></i>
                     <span>Keuntungan</span>
                 </a>
-                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Keuntungan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
@@ -363,7 +367,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
                                 <img class="img-profile rounded-circle"
                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
@@ -408,26 +413,46 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data SHU</h6>
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="nama">Nama Lengkap</label>
-                                <input type="text" name="nama" id="" class="form-control" placeholder="" aria-describedby="msg1">
-                                <small id="msg1" class="text-muted">Help text</small>
-                            </div>
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="nama">Nama Lengkap</label>
+                                    <input type="text" name="nama" id="nama1" class="form-control" placeholder=""
+                                        aria-describedby="msg1">
+                                    <small id="msg1" class="text-muted">Help text</small>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" name="cari" class="btn btn-info btn-sm">Cari</button>
+                                </div>
+                            </form>
                             <hr>
                             <?php 
-                                $jumlah_total = $shu->jml;
-                                $jumlah_agoota = $tanggo->jml; 
-                                $keuntungan = ($totung->jml * 40) / 100;
-                                $jumlah = ($jumlah_total / $jumlah_agoota) * $keuntungan;
-                                $data = "";
-                                $data .= "
-                                    Total Simpanan : Rp.$jumlah_total <br>
-                                    Total Simpanan Anggota : Rp.$jumlah_agoota <br>
-                                    Keuntungan : Rp.$keuntungan <br>
+                                if(isset($_POST['cari'])) {
+                                    $jumlah_total = $shu->jml;
+                                    $id = $this->mdata->cek_id_anggota($_POST['nama']);
+                                    if ($id != false) {
+                                        $total = $this->mdata->total_simpanan_anggota($id);
+                                        if ($total != '') {
+                                            $jumlah_agoota =  $total->jml;
+                                            $keuntungan = ($totung->jml * 40) / 100;
+                                            $jumlah = ($jumlah_agoota / $jumlah_total) * $keuntungan;
+                                            $data = "";
+                                            $data .= "
+                                                Total Simpanan : Rp.$jumlah_total <br>
+                                                Total Simpanan Anggota : Rp.$jumlah_agoota <br>
+                                                Keuntungan : Rp.$keuntungan <br>
 
-                                ";
-                                echo($data);
-                                echo "<p class=text-right>Total Keuntungan Anda : Rp.$jumlah</p>";
+                                            ";
+                                            echo($data);
+                                            echo "<p class=text-right>Total Keuntungan Anda : Rp.".intval($jumlah)."</p>";
+                                        } 
+                                        else {
+                                            echo '<div><h4>Tidak Ada Data, Silahkan Isi Form Nama Untuk Melihat SHU</h4></div>';
+                                        }
+                                    } elseif($id == false) {
+                                        echo '<div><h4>Akun Tidak Terdaftar</h4></div>';
+                                    }
+                                    
+                                }
                             ?>
                         </div>
                     </div>
@@ -481,6 +506,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url()?>/admin/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?=base_url('/assets/jquery-ui/jquery-ui.min.js')?>"></script>
     <script src="<?=base_url()?>/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -495,7 +521,17 @@
 
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#nama1').autocomplete({
+            source: "<?php echo site_url('login/get_user_autocomplete');?>",
 
+            select: function(event, ui) {
+                $('[name="nama"]').val(ui.item.label);
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

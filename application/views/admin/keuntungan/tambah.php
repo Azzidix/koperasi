@@ -431,7 +431,7 @@
                                     <small id="msg1" class="text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="nama">Tanggal Lahir</label>
+                                        <label for="nama">Tanggal</label>
                                         <input type="date" name="tanggal" id="" class="form-control" placeholder="" aria-describedby="msg4">
                                         <small id="msg4" class="text-muted">Help text</small>
                                     </div>

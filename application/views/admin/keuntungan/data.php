@@ -458,7 +458,6 @@
                                         <tr>
                                             <td><?=$row->tanggal?></td>
                                             <td><?=$row->jumlah?></td>
-                                            <td></td>
                                             <td>
                                                 <a href="<?php echo base_url('dashboard/hapus_keuntungan/').$row->id;?>" class="btn btn-sm btn-danger p-1 m-1"><i class="fa fa-trash"></i></a>
                                                 <button class="btn btn-sm btn-info p-1 m-1 editData" data="<?=$row->id?>" data-toggle="modal" data-target="#modelId"><i class="fa fa-edit"></i></button>

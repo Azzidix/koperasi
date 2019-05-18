@@ -112,8 +112,7 @@ class Dashboard extends CI_Controller {
 		$id = $this->input->post('id');
 		$data = array(
 			'id' => $id,
-			'jumlah' => $this->input->post('jumlah'),
-			'tanggal' => $this->input->post('tanggal'),
+			'jumlah' => $this->input->post('jumlah')
 
 		);
 		if($this->mdata->update_simpanan($data, $id) == true) {
@@ -168,11 +167,20 @@ class Dashboard extends CI_Controller {
 		$data = $this->mdata->edit_pinjaman($id);
 		echo json_encode($data);
 	}
+
+	public function hapus_pinjaman($id) {
+		if ($this->mdata->hapus_pinjaman($id) == true) {
+			$this->session->set_flashdata('message', 'deleted');
+			redirect('dashboard/data_pinjaman');
+		} else {
+			$this->session->set_flashdata('message', 'undeleted');
+			redirect('dashboard/data_pinjaman');
+		}
+	}
 	/* End Pinjaman */
 	/* SHU */
 	public function data_shu() {
 		$data['totung'] = $this->mdata->total_keuntungan();
-		$data['tanggo'] = $this->mdata->total_simpanan_anggota('1605190001');
 		$data['shu'] = $this->mdata->data_simpanan_anggota();
 		$this->load->view('admin/shu/data',$data);
 	}
@@ -213,7 +221,7 @@ class Dashboard extends CI_Controller {
 	public function update_keuntungan() {
 		$id = $this->input->post('id');
 		$data = array(
-			'id_anggota' => $id,
+			'id' => $id,
 			'jumlah' => $this->input->post('jumlah'),
 			'tanggal' => $this->input->post('tanggal'),
 

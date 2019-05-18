@@ -165,8 +165,18 @@ class m_login extends CI_Model {
 		}
 	}
 
-	public function ubah_simpaman($data,$id) {
-		$this->db->where($id);
+	public function edit_simpanan($id) {
+		$this->db->where('id',$id);
+		$sql = $this->db->get('simpanan');
+		if ($this->db->affected_rows() > 0) {
+			return $sql->result();
+		} else {
+			return false;
+		}
+	}
+
+	public function update_simpanan($data,$id) {
+		$this->db->where('id',$id);
 		$sql = $this->db->update('simpanan', $data);
 		if ($this->db->affected_rows() > 0) {
 			return true;
@@ -198,7 +208,7 @@ class m_login extends CI_Model {
 	/* End Simpnanan */
 	/* Pinjaman */
 	public function tampil_data_pinjaman() {
-		$this->db->select('a.id_anggota, a.nama, p.jumlah, p.status, p.tanggal');
+		$this->db->select('p.id, a.nama, p.jumlah, p.status, p.tanggal,p.jenis');
 		$this->db->from('pinjaman as p');
 		$this->db->join('anggota as a','a.id_anggota = p.id_anggota');
 		$sql = $this->db->get();
@@ -221,7 +231,7 @@ class m_login extends CI_Model {
 	}
 
 	public function ubah_pinjaman($data,$id) {
-		$this->db->where($id);
+		$this->db->where('id',$id);
 		$sql = $this->db->update('pinjaman', $data);
 		if ($this->db->affrcted_rows() > 0) {
 			return true;
@@ -230,8 +240,8 @@ class m_login extends CI_Model {
 		}
 	}
 
-	public function hapus_pijaman($id) {
-		$this->db->where($id);
+	public function hapus_pinjaman($id) {
+		$this->db->where('id',$id);
 		$sql = $this->db->delete('pinjaman');
 		if ($this->db->affected_rows() > 0) {
 			return true;

@@ -61,7 +61,8 @@
                     <i class="fas fa-fw fa-user"></i>
                     <span>Keuntungan</span>
                 </a>
-                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapsekeuntungan" class="collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Keuntungan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
@@ -357,7 +358,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->userdata('ci_nama')?></span>
                                 <img class="img-profile rounded-circle"
                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
@@ -401,8 +403,8 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data Simpanan</h6>
                         </div>
                         <div class="card-body">
-                        <div class="message">
-                                    <?php
+                            <div class="message">
+                                <?php
                                         if ($this->session->userdata('message') == 'undeleted') {
                                             echo '<div class="alert alert-warning">
                                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -425,10 +427,10 @@
                                                 </div>';
                                         }
                                     ?>
-                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
+                                    <thead>
                                         <tr>
                                             <th>Nama</th>
                                             <th>Jumlah</th>
@@ -445,7 +447,8 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php if ($simpanan != false) {foreach($simpanan as $row) {
+                                        <?php 
+                                        if ($simpanan != false) {foreach($simpanan as $row) {
                      
                       ?>
                                         <tr>
@@ -453,8 +456,12 @@
                                             <td><?=$row->jumlah?></td>
                                             <td><?=$row->tanggal?></td>
                                             <td>
-                                                <a href="<?php echo base_url('dashboard/hapus_simpanan/').$row->id;?>" class="btn btn-sm btn-danger p-1 m-1"><i class="fa fa-trash"></i></a>
-                                                <button class="btn btn-sm btn-info p-1 m-1 editData" data="<?=$row->id?>" data-toggle="modal" data-target="#modelId"><i class="fa fa-edit"></i></button>
+                                                <a href="<?php echo base_url('dashboard/hapus_simpanan/').$row->id;?>"
+                                                    class="btn btn-sm btn-danger p-1 m-1"><i
+                                                        class="fa fa-trash"></i></a>
+                                                <button class="btn btn-sm btn-info p-1 m-1 editData"
+                                                    data="<?=$row->id?>" data-toggle="modal" data-target="#modelId"><i
+                                                        class="fa fa-edit"></i></button>
                                             </td>
                                         </tr>
                                         <?php } }?>
@@ -465,6 +472,36 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Simpanan</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="<?=base_url('dashboard/update_simpanan')?>" method="post">
+                            <div class="form-group">
+                                <input type="text" name="id" id="id2" class="form-control" placeholder="" aria-describedby="msg0" hidden="">
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Jumlah</label>
+                                <input type="text" name="jumlah" id="jumlah" class="form-control" placeholder="" aria-describedby="msg1">
+                                <small id="msg1" class="text-muted">Help text</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="update" class="btn btn-info">Simpan</button>
+                        </div>
+                        
+                        </form>
+                        </div>
+                    </div>
+                    </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
@@ -529,11 +566,29 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
     <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('.alert').remove();
-            }, 5000);
+    $(document).ready(function() {
+        $('.editData').on('click', function() {
+            var id = $(this).attr('data');
+            console.log('click' + id);
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/dashboard/edit_simpanan/" + id,
+                data: {},
+                dataType: "JSON",
+                success: function(response) {
+                    $.each(response, function(index, value) {
+                        $('#id2').val(value.id);
+                        $('#jumlah').val(value.jumlah);
+                    });
+
+                }
+            });
         });
+
+        setTimeout(function() {
+            $('.alert').remove();
+        }, 5000);
+    });
     </script>
 </body>
 

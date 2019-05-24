@@ -25,6 +25,10 @@ class Dashboard extends CI_Controller {
 		} 
 	}
 
+	public function keuntungan() {
+		echo json_encode($this->mdata->tampil_data_keuntungan());
+	}
+
 	public function id_anggota() {
 		echo($this->mdata->id_anggota());
 	}

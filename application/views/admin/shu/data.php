@@ -439,7 +439,7 @@
                                             $data .= "
                                                 Total Simpanan : Rp.$jumlah_total <br>
                                                 Total Simpanan Anggota : Rp.$jumlah_agoota <br>
-                                                Keuntungan : Rp.$keuntungan <br>
+                                                Keuntungan : Rp.$totung->jml <br>
 
                                             ";
                                             echo($data);

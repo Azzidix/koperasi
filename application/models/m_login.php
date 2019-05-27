@@ -230,10 +230,20 @@ class m_login extends CI_Model {
 		}
 	}
 
+	public function edit_pinjaman($id) {
+		$this->db->where('id',$id);
+		$sql = $this->db->get('pinjaman');
+		if ($this->db->affected_rows() > 0) {
+			return $sql->result();
+		} else {
+			return false;
+		}
+	}
+
 	public function update_pinjaman($data,$id) {
 		$this->db->where('id',$id);
 		$sql = $this->db->update('pinjaman', $data);
-		if ($this->db->affrcted_rows() > 0) {
+		if ($this->db->affected_rows() > 0) {
 			return true;
 		} else {
 			return false;

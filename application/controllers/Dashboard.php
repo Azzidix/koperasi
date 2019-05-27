@@ -138,6 +138,7 @@ class Dashboard extends CI_Controller {
 		}
 	}
 	/* End Simpanan */
+
 	/* Pinjaman */
 	public function data_pinjaman() {
 		$data['pinjaman'] = $this->mdata->tampil_data_pinjaman();
@@ -172,6 +173,22 @@ class Dashboard extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function update_pinjaman() {
+		$id = $this->input->post('id');
+		$data = array(
+			'id' => $id,
+			'jumlah' => $this->input->post('jumlah')
+
+		);
+		if($this->mdata->update_pinjaman($data, $id) == true) {
+			$this->session->set_flashdata('message', 'updated');
+			redirect('dashboard/data_pinjaman');
+		} else {
+			$this->session->set_flashdata('message', 'unupdated');
+			redirect('dashboard/data_pinjaman');
+		}
+	}
+
 	public function hapus_pinjaman($id) {
 		if ($this->mdata->hapus_pinjaman($id) == true) {
 			$this->session->set_flashdata('message', 'deleted');
@@ -182,6 +199,7 @@ class Dashboard extends CI_Controller {
 		}
 	}
 	/* End Pinjaman */
+
 	/* SHU */
 	public function data_shu() {
 		$data['totung'] = $this->mdata->total_keuntungan();
@@ -189,6 +207,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('admin/shu/data',$data);
 	}
 	/* End SHU */
+
 	/* Keuntungan */
 	public function data_keuntungan() {
 		$data['keuntungan'] = $this->mdata->tampil_data_keuntungan();

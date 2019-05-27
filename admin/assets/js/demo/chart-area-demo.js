@@ -28,7 +28,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 $.ajax({
   type: "GET",
-  url: "http://localhost/dashboard/keuntungan/",
+  url: "http://localhost:81/dashboard/keuntungan/",
   data: {},
   dataType: "json",
   success: function (response) {

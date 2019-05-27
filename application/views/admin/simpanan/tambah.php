@@ -72,7 +72,6 @@
                         <h6 class="collapse-header">Keuntungan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_keuntungan')?>">Tambah</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_keuntungan')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -97,7 +96,6 @@
                         <h6 class="collapse-header">Anggota</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_anggota')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_anggota')?>">Tambah</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_anggota')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -123,7 +121,6 @@
                         <h6 class="collapse-header">Simpanan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_simpanan')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_simpanan')?>">Simpan</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_simpanan')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -148,7 +145,6 @@
                         <h6 class="collapse-header">Pinjaman</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_pinjaman')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_pinjaman')?>">Pinjam</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_pinjaman')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -171,7 +167,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">SHU</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_shu')?>">Data</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_shu')?>">Laporan</a>
                     </div>
                 </div>
             </li>

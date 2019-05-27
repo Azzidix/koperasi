@@ -230,7 +230,7 @@ class m_login extends CI_Model {
 		}
 	}
 
-	public function ubah_pinjaman($data,$id) {
+	public function update_pinjaman($data,$id) {
 		$this->db->where('id',$id);
 		$sql = $this->db->update('pinjaman', $data);
 		if ($this->db->affrcted_rows() > 0) {
@@ -250,6 +250,7 @@ class m_login extends CI_Model {
 		}
 	}
 	/* End Pinjaman */
+
 	/* Kentungan */
 	public function tampil_data_keuntungan() {
 		$sql = $this->db->get('keuntungan');

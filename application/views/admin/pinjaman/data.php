@@ -66,7 +66,6 @@
                         <h6 class="collapse-header">Keuntungan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_keuntungan')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_keuntungan')?>">Tambah</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_keuntungan')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -91,7 +90,6 @@
                         <h6 class="collapse-header">Anggota</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_anggota')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_anggota')?>">Tambah</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_anggota')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -117,7 +115,6 @@
                         <h6 class="collapse-header">Simpanan</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_simpanan')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_simpanan')?>">Simpan</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_simpanan')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -142,7 +139,6 @@
                         <h6 class="collapse-header">Pinjaman</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_pinjaman')?>">Data</a>
                         <a class="collapse-item" href="<?=base_url('dashboard/form_pinjaman')?>">Pinjam</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_pinjaman')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -165,7 +161,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">SHU</h6>
                         <a class="collapse-item" href="<?=base_url('dashboard/data_shu')?>">Data</a>
-                        <a class="collapse-item" href="<?=base_url('dashboard/laporan_shu')?>">Laporan</a>
                     </div>
                 </div>
             </li>
@@ -479,6 +474,36 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Pinjaman</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="<?=base_url('dashboard/update_pinjaman')?>" method="post">
+                            <div class="form-group">
+                                <input type="text" name="id" id="id2" class="form-control" placeholder="" aria-describedby="msg0" hidden="">
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Jumlah</label>
+                                <input type="text" name="jumlah" id="jumlah" class="form-control" placeholder="" aria-describedby="msg1">
+                                <small id="msg1" class="text-muted">Help text</small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="update" class="btn btn-info">Simpan</button>
+                        </div>
+                        
+                        </form>
+                        </div>
+                    </div>
+                    </div>
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
@@ -544,6 +569,23 @@
     <script src="<?=base_url()?>/admin/assets/js/demo/datatables-demo.js"></script>
     <script>
         $(document).ready(function() {
+            $('.editData').on('click', function() {
+            var id = $(this).attr('data');
+            console.log('click' + id);
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:81/dashboard/edit_pinjaman/" + id,
+                data: {},
+                dataType: "JSON",
+                success: function(response) {
+                    $.each(response, function(index, value) {
+                        $('#id2').val(value.id);
+                        $('#jumlah').val(value.jumlah);
+                    });
+
+                }
+            });
+        });
             setTimeout(function() {
                 $('.alert').remove();
             }, 5000);
